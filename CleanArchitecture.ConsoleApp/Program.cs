@@ -9,6 +9,18 @@ StreamerDbContext streamerDbContext = new();
 
 await QueryMethods();
 
+async Task QueryWithLinq()
+{
+    var streamers = await (from i in streamerDbContext.Streamers
+                           where EF.Functions.Like(i.Name, "%a%")
+                           select i).ToListAsync();
+
+    foreach (var streamer in streamers)
+    {
+        Console.WriteLine($"{streamer.Id} - {streamer.Name}");
+    }
+}
+
 async Task QueryMethods()
 {
     var streamers = streamerDbContext.Streamers;
