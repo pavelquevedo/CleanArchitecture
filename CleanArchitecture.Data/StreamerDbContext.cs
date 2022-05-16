@@ -8,7 +8,9 @@ namespace CleanArchitecture.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=localhost\SQLEXPRESS; 
-                Initial Catalog=Streamer; Integrated Security=True");
+                Initial Catalog=Streamer; Integrated Security=True")
+                .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, Microsoft.Extensions.Logging.LogLevel.Information)
+                .EnableSensitiveDataLogging();
         }
         public DbSet<Streamer> Streamers { get; set; } 
         public DbSet<Video> Videos { get; set; }
