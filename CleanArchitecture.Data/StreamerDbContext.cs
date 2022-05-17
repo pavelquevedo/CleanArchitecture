@@ -12,6 +12,19 @@ namespace CleanArchitecture.Data
                 .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, Microsoft.Extensions.Logging.LogLevel.Information)
                 .EnableSensitiveDataLogging();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        {
+            //We can declare manually the foreign keys using FluentAPI
+            //if we're not following the naming conventions suggested by EntityFramework
+            modelBuilder.Entity<Streamer>()
+                .HasMany(m => m.Videos)
+                .WithOne(m => m.Streamer)
+                .HasForeignKey(m => m.StreamerId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+
         public DbSet<Streamer> Streamers { get; set; } 
         public DbSet<Video> Videos { get; set; }
     }
