@@ -1,8 +1,9 @@
-﻿namespace CleanArchitecture.Domain
+﻿using CleanArchitecture.Domain.Common;
+
+namespace CleanArchitecture.Domain
 {
-    public class Director
+    public class Director : BaseDomainModel
     {
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int VideoId { get; set; }    

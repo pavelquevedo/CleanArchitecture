@@ -1,12 +1,13 @@
-﻿namespace CleanArchitecture.Domain
+﻿using CleanArchitecture.Domain.Common;
+
+namespace CleanArchitecture.Domain
 {
-    public class Video
+    public class Video : BaseDomainModel
     {
         public Video()
         {
             Actors = new HashSet<Actor>();
         }
-        public int Id { get; set; }
         public string Name { get; set; }
         public int StreamerId { get; set; }
         public virtual Streamer Streamer { get; set; }
