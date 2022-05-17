@@ -13,7 +13,7 @@ namespace CleanArchitecture.Data
                 .EnableSensitiveDataLogging();
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //We can declare manually the foreign keys using FluentAPI
             //if we're not following the naming conventions suggested by EntityFramework
@@ -23,9 +23,19 @@ namespace CleanArchitecture.Data
                 .HasForeignKey(m => m.StreamerId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            //Definition of many to many relationship
+            modelBuilder.Entity<Video>()
+                .HasMany(m => m.Actors)
+                .WithMany(m => m.Videos)
+                .UsingEntity<VideoActor>(
+                    pt => pt.HasKey(e => new { e.ActorId, e.VideoId })
+                );
         }
 
-        public DbSet<Streamer> Streamers { get; set; } 
-        public DbSet<Video> Videos { get; set; }
+        public DbSet<Streamer> Streamers { get; set; }
+        public DbSet<Video> Videos { get; set; } 
+        public DbSet<Actor> Actors { get; set; }
+        public DbSet<Director> Directors { get; set; }
     }
 }
