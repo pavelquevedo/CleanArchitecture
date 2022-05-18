@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Behaviors\" />
+    <Folder Include="Features\Streamers\Queries\" />
     <Folder Include="Features\Videos\Commands\" />
   </ItemGroup>
 
