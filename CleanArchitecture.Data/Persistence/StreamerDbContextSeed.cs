@@ -24,7 +24,7 @@ namespace CleanArchitecture.Infrastructure.Persistence
         {
             return new List<Streamer>()
             {
-                new Streamer{CreatedBy = "Pavel Quevedo", Name = "Maxi HBP", Url="http://www.hbp.com"}
+                new Streamer{CreatedBy = "Pavel Quevedo", Name = "Maxi HBP", Url="http://www.hbp.com"},
                 new Streamer{CreatedBy = "Pavel Quevedo", Name = "Amazon VIP", Url="http://www.amazonvip.com"}
             };
         }
