@@ -21,18 +21,18 @@ namespace CleanArchitecture.API.Controllers
 
         [HttpPost(Name ="CreateStreamer")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<int>> CreateStreamer([FromBody] CreateStreamerCommand command)
+        public async Task<ActionResult<int>> CreateStreamer([FromBody] CreateStreamerCommand createCommand)
         {
-            return await _mediator.Send(command);
+            return await _mediator.Send(createCommand);
         }
 
-        [HttpPost(Name = "UpdateStreamer")]
+        [HttpPut(Name = "UpdateStreamer")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> UpdateStreamer([FromBody] UpdateStreamerCommand command)
+        public async Task<ActionResult> UpdateStreamer([FromBody] UpdateStreamerCommand updateCommand)
         {
-            await _mediator.Send(command);
+            await _mediator.Send(updateCommand);
             return NoContent();
         }
 
