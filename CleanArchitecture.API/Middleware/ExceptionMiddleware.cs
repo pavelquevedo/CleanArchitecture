@@ -1,6 +1,5 @@
 ﻿using CleanArchitecture.API.Errors;
 using CleanArchitecture.Application.Exceptions;
-using Newtonsoft.Json;
 using System.Net;
 using System.Text.Json;
 
@@ -46,8 +45,8 @@ namespace CleanArchitecture.API.Middleware
 
                     case ValidationException validationException:
                         statusCode = (int)HttpStatusCode.BadRequest;
-                        var validationJson = JsonConvert.SerializeObject(validationException.Errors);
-                        result = JsonConvert.SerializeObject(new CodeErrorException(statusCode, ex.Message, validationJson));
+                        var validationJson = JsonSerializer.Serialize(validationException.Errors, options);
+                        result = JsonSerializer.Serialize(new CodeErrorException(statusCode, ex.Message, validationJson), options);
                         break;
 
                     case BadRequestException badRequestException:
@@ -60,18 +59,16 @@ namespace CleanArchitecture.API.Middleware
 
                 if (string.IsNullOrEmpty(result))
                 {
-                    result = JsonConvert.SerializeObject(new CodeErrorException(statusCode, ex.Message, ex.StackTrace));
+                    result = JsonSerializer.Serialize(new CodeErrorException(statusCode, ex.Message, ex.StackTrace), options);
                 }
 
                 var response = _environment.IsDevelopment()
                     ? result
-                    : JsonConvert.SerializeObject(new CodeErrorException((int)HttpStatusCode.InternalServerError));
-
-                
+                    : JsonSerializer.Serialize(new CodeErrorException((int)HttpStatusCode.InternalServerError), options);
 
                 //var json = JsonSerializer.Serialize(response, options);
                 context.Response.StatusCode = statusCode;
-                await context.Response.WriteAsync(result);
+                await context.Response.WriteAsync(response);
             }
         }
     }
