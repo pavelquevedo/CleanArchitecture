@@ -18,6 +18,7 @@ namespace CleanArchitecture.Identity.Configurations
                     NormalizedEmail = "admin@pavelquevedo.com",
                     FirstName = "Pavel",
                     LastName = "Quevedo",
+                    UserName = "pavelquevedo",
                     NormalizedUserName = "pavelquevedo",
                     PasswordHash = hasher.HashPassword(null, "pass"),
                     EmailConfirmed = true
@@ -29,6 +30,7 @@ namespace CleanArchitecture.Identity.Configurations
                     NormalizedEmail = "test@pavelquevedo.com",
                     FirstName = "Test",
                     LastName = "User",
+                    UserName = "test",
                     NormalizedUserName = "test",
                     PasswordHash = hasher.HashPassword(null, "pass"),
                     EmailConfirmed = true
