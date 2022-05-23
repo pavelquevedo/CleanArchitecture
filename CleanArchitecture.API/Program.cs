@@ -1,3 +1,4 @@
+using CleanArchitecture.API.Middleware;
 using CleanArchitecture.Application.Extensions;
 using CleanArchitecture.Identity.Extensions;
 using CleanArchitecture.Infrastructure.Extensions;
@@ -33,6 +34,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//Adding customized exception middleware
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
